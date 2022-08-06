@@ -20,10 +20,9 @@ local mapstovote2 = { 'mp_vacant', 'mp_broadcast', 'mp_carentan','mp_countdown',
 local mapstovote3 = {  'mp_showdown', 'mp_cargoship', 'mp_killhouse', 'mp_crash_snow', 'mp_farm_spring', 'mp_bog_summer' }
 
 -- If you only want certain maps, edit them above (keep them fairly balanced) --
-
-local map1 = mapstovote1[ math.random( #mapstovote1 ) ]
-local map2 = mapstovote2[ math.random( #mapstovote2 ) ]
-local map3 = mapstovote3[ math.random( #mapstovote3 ) ]
+local map1clean = maptoname(mapstovote1[ math.random( #mapstovote1 ) ])
+local map2clean = maptoname(mapstovote1[ math.random( #mapstovote2 ) ])
+local map3clean = maptoname(mapstovote1[ math.random( #mapstovote3 ) ])
 
 local map1count = 0
 local map2count = 0
@@ -32,58 +31,6 @@ local map3count = 0
 local zed = {}
 
 game:precachesound("mp_challenge_complete")
-
-if map1 == "mp_convoy" then
-    map1clean = "Ambush"
-elseif map1 == "mp_backlot" then
-    map1clean = "Backlot"
-elseif map1 == "mp_bog" then
-    map1clean = "Bog"
-elseif map1 == "mp_crash" then
-    map1clean = "Crash"
-elseif map1 == "mp_crossfire" then
-    map1clean = "Crossfire"
-elseif map1 == "mp_citystreets" then
-    map1clean = "District"
-elseif map1 == "mp_farm" then
-    map1clean = "Downpour"
-elseif map1 == "mp_overgrown" then
-    map1clean = "Overgrown"
-elseif map1 == "mp_shipment" then
-    map1clean = "Shipment"
-end
-
-if map2 == "mp_vacant" then
-    map2clean = "Vacant"
-elseif map2 == "mp_broadcast" then
-    map2clean = "Broadcast"
-elseif map2 == "mp_carentan" then
-    map2clean = "Chinatown"
-elseif map2 == "mp_countdown" then
-    map2clean = "Countdown"
-elseif map2 == "mp_bloc" then
-    map2clean = "Bloc"
-elseif map2 == "mp_creek" then
-    map2clean = "Creek"
-elseif map2 == "mp_pipeline" then
-    map2clean = "Pipeline"
-elseif map2 == "mp_strike" then
-    map2clean = "Strike"
-end
-
-if map3 == "mp_showdown" then
-    map3clean = "Vacant"
-elseif map3 == "mp_cargoship" then
-    map3clean = "Wet Work"
-elseif map3 == "mp_killhouse" then
-    map3clean = "Killhouse"
-elseif map3 == "mp_crash_snow" then
-    map3clean = "Winter Crash"
-elseif map3 == "mp_farm_spring" then
-    map3clean = "Day Break"
-elseif map3 == "mp_bog_summer" then
-    map3clean = "Beach Bog"
-end
 
 config.started = false
 
@@ -242,4 +189,35 @@ function mapvoteconnected(player)
             disconnectListener:clear()
         end)
     end
+end
+
+-------- Utils
+function maptoname( mapid )
+    mapid = mapid:lower()
+    if     mapid == "mp_convoy" then return "Ambush"
+    elseif mapid == "mp_backlot" then return "Backlot"
+    elseif mapid == "mp_bog" then return "Bog"
+    elseif mapid == "mp_crash" then return "Crash"
+    elseif mapid == "mp_crossfire" then return "Crossfire"
+    elseif mapid == "mp_citystreets" then return "District"
+    elseif mapid == "mp_farm" then return "Downpour"
+    elseif mapid == "mp_overgrown" then return "Overgrown"
+    elseif mapid == "mp_shipment" then return "Shipment"
+    elseif mapid == "mp_vacant" then return "Vacant"
+    elseif mapid == "mp_vlobby_room" then return "Lobby Map"
+    elseif mapid == "mp_broadcast" then return "Broadcast"
+    elseif mapid == "mp_carentan" then return "Chinatown"
+    elseif mapid == "mp_countdown" then return "Countdown"
+    elseif mapid == "mp_bloc" then return "Bloc"
+    elseif mapid == "mp_creek" then return "Creek"
+    elseif mapid == "mp_killhouse" then return "Killhouse"
+    elseif mapid == "mp_pipeline" then return "Pipeline"
+    elseif mapid == "mp_strike" then return "Strike"
+    elseif mapid == "mp_showdown" then return "Showdown"
+    elseif mapid == "mp_cargoship" then return "Wet Work"
+    elseif mapid == "mp_crash_snow" then return "Winter Crash"
+    elseif mapid == "mp_farm_spring" then return "Day Break"
+    elseif mapid == "mp_bog_summer" then return "Beach Bog"
+    end
+    return mapid
 end
